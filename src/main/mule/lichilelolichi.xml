@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="ff97232d-99e8-4791-a0b5-96a057ba66a0" >
+		<http:listener-connection host="0.0.0.0" port="8081" />
+	</http:listener-config>
+	<flow name="lichilelolichiFlow" doc:id="596de5a1-35fa-4ae4-b71e-7dfbae6912f5" >
+		<http:listener doc:name="Listener" doc:id="92226699-7611-4d07-a821-423f8f5453b5" config-ref="HTTP_Listener_config" path="/test"/>
+		<logger level="INFO" doc:name="Logger" doc:id="acfa1072-548a-4847-80ce-f98cf499f8bd" message="startflow"/>
+		<ee:transform doc:name="Transform Message" doc:id="a0b5b58e-dfaf-4770-a944-77ffd9a5e09f" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+"Buy fresh and juicy litchi from us at very low coast "]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+		<logger level="INFO" doc:name="Logger" doc:id="8ab319ce-eede-43b0-873f-146457b8b30f" message="end flow"/>
+	</flow>
+</mule>
